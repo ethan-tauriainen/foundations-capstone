@@ -305,10 +305,7 @@ public class GameFrame extends JFrame {
         // fill in the field, or press next to skip the question and forfeit
         // points.
         if (answerField.getText().isEmpty()) {
-            String msg = """
-                    Please enter an answer.
-                    If you wish to forfeit this question, press 'Next'.
-                    """;
+            String msg = "Please enter an answer.\nIf you wish to forfeit, press 'Next'.";
             JOptionPane.showMessageDialog(this, msg, "Invalid Entry", JOptionPane.ERROR_MESSAGE);
             answerField.requestFocusInWindow();
             return;
