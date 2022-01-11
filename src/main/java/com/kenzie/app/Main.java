@@ -1,23 +1,42 @@
 package com.kenzie.app;
 
-// import necessary libraries
+import javax.swing.JFrame;
 
-
+/**
+ * The main class simply serves as the driver for the program.
+ * It contains the main method, which simply constructs
+ * a GameFrame object.
+ *
+ * @author Ethan Tauriainen
+ */
 public class Main {
-    /* Java Fundamentals Capstone project:
-       - Define as many variables, properties, and methods as you decide are necessary to
-       solve the program requirements.
-       - You are not limited to only the class files included here
-       - You must write the HTTP GET call inside the CustomHttpClient.sendGET(String URL) method
-         definition provided
-       - Your program execution must run from the main() method in Main.java
-       - The rest is up to you. Good luck and happy coding!
 
+    /**
+     * Simple main method. Its only purpose is to construct
+     * the GameFrame object and some related settings.
+     *
+     * The first statement is used to execute statements in the
+     * event dispatch thread. According to Cay Horstmann in
+     * his book Core Java: Volume I, all swing components must
+     * be configured form the event dispatch thread.
+     *
+     * Next up is the definition of what the app should do when
+     * the user closes the application. It should exit.
+     *
+     * I set the frame to be resizable because I'm not yet comfortable
+     * enough with Swing to use weightx and weighty parameters of the
+     * GridBagConstraints object to allow for the window and its contents
+     * to be gracefully resized.
+     *
+     * Finally, because constructing a frame doesn't mean it will display,
+     * it must be explicitly declared with the setVisible() method.
      */
-
-
     public static void main(String[] args)  {
-        //Write main execution code here
+        java.awt.EventQueue.invokeLater(() -> {
+            JFrame frame = new GameFrame();
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setResizable(false);
+            frame.setVisible(true);
+        });
     }
 }
-
