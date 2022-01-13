@@ -35,7 +35,7 @@ public class CustomHttpClient {
      * @throws ResponseCodeException thrown if any response code other than 200 is received.
      */
     public static String sendGET(String URLString) throws URISyntaxException, IOException,
-            InterruptedException, ResponseCodeException {
+            InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -49,7 +49,9 @@ public class CustomHttpClient {
         if (status == 200) {
             return httpResponse.body();
         } else {
-            throw new ResponseCodeException("Error: bad response code of " + status + " received.");
+//            throw new ResponseCodeException("Error: bad response code of " + status + " received.");
+            String msg = "Error: bad response code of " + status + " received.";
+            return msg;
         }
     }
 

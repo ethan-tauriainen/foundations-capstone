@@ -36,7 +36,7 @@ public class GameFrame extends JFrame {
 
     // The following defines a timer object.
     // It will be used to update the timerField and control
-    // the pace of play. The user will have 30 seconds to answer
+    // the pace of play. The user will have 45 seconds to answer
     // each question.
     //
     // I learned how to use this object here:
@@ -214,7 +214,11 @@ public class GameFrame extends JFrame {
      * The timer starts out in green font, but when it reaches
      * 10 seconds left it turns to red.
      * When time is out, the submit button will be disabled and a
-     * dialogue box will appear.
+     * dialogue box will appear containing instructions to move on,
+     * as well as the correct answer to the missed question.
+     *
+     * This method will 'fire' every second as indicated when I
+     * constructed the Timer object above.
      */
     private void updateTimerField() {
         if (time == 0) {
@@ -259,7 +263,7 @@ public class GameFrame extends JFrame {
      */
     private void startButtonClicked() {
         try {
-            String responseBody = CustomHttpClient.sendGET("https://jservice.kenzie.academy/api/clues");
+            String responseBody = CustomHttpClient.sendGET("https://jservice.kenzie.academy/api/cluess");
             clues = CustomHttpClient.getCluesList(responseBody);    // Populate the clues list with clues.
             Collections.shuffle(clues);     // Randomize the list of clues.
             questionArea.setText(displayQuestion());
@@ -270,7 +274,7 @@ public class GameFrame extends JFrame {
             submitButton.setEnabled(true);  // Same.
             time = 45;
             timer.start();
-        } catch (URISyntaxException | IOException | InterruptedException | ResponseCodeException e) {
+        } catch (URISyntaxException | IOException | InterruptedException e) {
             // In the case of an error, display a dialogue box:
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             System.exit(0); // Exit gracefully.
