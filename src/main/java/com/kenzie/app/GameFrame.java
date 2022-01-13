@@ -274,7 +274,7 @@ public class GameFrame extends JFrame {
             submitButton.setEnabled(true);  // Same.
             time = 45;
             timer.start();
-        } catch (URISyntaxException | IOException | InterruptedException e) {
+        } catch (URISyntaxException | IOException | InterruptedException | ResponseCodeException e) {
             // In the case of an error, display a dialogue box:
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             System.exit(0); // Exit gracefully.

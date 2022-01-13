@@ -24,18 +24,19 @@ public class CustomHttpClient {
 
     /**
      * Makes a GET request to the API at the given URL.
-     * Used pretty much the same code as in the reading, Calling an HTTP API.
+     * Based on the reading, Calling an HTTP API.
      *
      * @param URLString the URL with which the GET request will be made.
-     * @return either the response body containing a JSON string, or, if it fails,
-     * an error message.
+     * @return the response body containing a JSON string, or, if it fails,
+     * an exception will be thrown and handled upstream.
+     *
      * @throws URISyntaxException thrown if the URL provided cannot be parsed.
      * @throws IOException general input/output exception, will catch JSON parsing issues, too.
      * @throws InterruptedException thrown if the connection halts (i.e. the thread is halted).
      * @throws ResponseCodeException thrown if any response code other than 200 is received.
      */
     public static String sendGET(String URLString) throws URISyntaxException, IOException,
-            InterruptedException {
+            InterruptedException, ResponseCodeException {
         HttpClient client = HttpClient.newHttpClient();
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -49,9 +50,8 @@ public class CustomHttpClient {
         if (status == 200) {
             return httpResponse.body();
         } else {
-//            throw new ResponseCodeException("Error: bad response code of " + status + " received.");
-            String msg = "Error: bad response code of " + status + " received.";
-            return msg;
+            // Custom exception I made to handle non '200' response codes.
+            throw new ResponseCodeException("Error: bad response code of " + status + " received.");
         }
     }
 
