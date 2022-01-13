@@ -263,7 +263,7 @@ public class GameFrame extends JFrame {
      */
     private void startButtonClicked() {
         try {
-            String responseBody = CustomHttpClient.sendGET("https://jservice.kenzie.academy/api/cluess");
+            String responseBody = CustomHttpClient.sendGET("https://jservice.kenzie.academy/api/clues");
             clues = CustomHttpClient.getCluesList(responseBody);    // Populate the clues list with clues.
             Collections.shuffle(clues);     // Randomize the list of clues.
             questionArea.setText(displayQuestion());
